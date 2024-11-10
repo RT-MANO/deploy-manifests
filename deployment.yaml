@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: rtmano/boot-webapp:3.0
+        image: rtmano/bootapp-e2e-pipeline-demo:TOBECHANGED
         ports:
         - containerPort: 8080
