@@ -4,7 +4,6 @@ pipeline{
     }
     environment {
         APP_NAME = "bootapp-e2e-pipeline-demo"
-        GITHUB_TOKEN = 'github'
         GIT_USER_NAME = "RT-MANO"
         GIT_REPO_NAME = "deploy-manifests"
 
@@ -34,13 +33,15 @@ pipeline{
         }
         stage("Push the updated Deployment file to Repo") {
             steps {
-                sh """
-                    git config --global user.name "RT-MANO"
-                    git config --global user.email "rt_mano@yahoo.com"
-                    git add deployment.yaml
-                    git commit -m "Updated Deployment Manifest!..."
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-                """
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    sh """
+                        git config --global user.name "RT-MANO"
+                        git config --global user.email "rt_mano@yahoo.com"
+                        git add deployment.yaml
+                        git commit -m "Updated Deployment Manifest!..."
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                    """
+                }
             }
 
         }
