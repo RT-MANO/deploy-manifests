@@ -16,12 +16,6 @@ pipeline{
             }
 
         }
-        stage("Print Env Var") {
-            steps {
-                sh 'printenv'
-            }
-
-        }
         stage("Checkout from SCM"){
             steps {
                 git branch: 'master', credentialsId: 'github', url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}"
@@ -33,6 +27,7 @@ pipeline{
                 sh """
                     cat deployment.yaml
                     sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+                    cat deployment.yaml
                 """
             }
 
