@@ -16,7 +16,12 @@ pipeline{
             }
 
         }
+        stage("Print Env Var") {
+            steps {
+                sh 'printenv'
+            }
 
+        }
         stage("Checkout from SCM"){
             steps {
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}'
