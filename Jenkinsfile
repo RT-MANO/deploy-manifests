@@ -33,7 +33,7 @@ pipeline{
         }
         stage("Push the updated Deployment file to Repo") {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'git-tool', variable: 'GITHUB_TOKEN')]) {
                     sh """
                         git config --global user.name "RT-MANO"
                         git config --global user.email "rt_mano@yahoo.com"
