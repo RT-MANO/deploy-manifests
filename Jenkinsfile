@@ -33,17 +33,16 @@ pipeline{
         }
         stage("Push the updated Deployment file to Repo") {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'git-tool', variable: 'GITHUB_TOKEN')]) {
-                    sh """
-                        git config --global user.name "RT-MANO"
-                        git config --global user.email "rt_mano@yahoo.com"
-                        git add deployment.yaml
-                        git commit -m "Updated Deployment Manifest!..."
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-                    """
+                sh """
+                    git config --global user.name "RT-MANO"
+                    git config --global user.email "rt_mano@yahoo.com"
+                    git add deployment.yaml
+                    git commit -m "Updated Deployment Manifest!..."
+                """
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                    sh "git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master"
                 }
             }
-
         }
 
     }
