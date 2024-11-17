@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: docker.io/rtmano/bootapp-e2e-pipeline-demo:1.0.0-38
+        image: docker.io/rtmano/bootapp-e2e-pipeline-demo:1.0.0-111
         ports:
         - containerPort: 8080
