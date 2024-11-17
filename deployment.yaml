@@ -5,7 +5,7 @@ metadata:
   labels:
     app: spring-boot-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: spring-boot-app
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: docker.io/rtmano/bootapp-e2e-pipeline-demo:1.0.0-99
+        image: rtmano/bootapp-e2e-pipeline-demo:1.0.0-38
         ports:
         - containerPort: 8080
